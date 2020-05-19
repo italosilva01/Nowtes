@@ -76,8 +76,10 @@ export default function Note (props){
                     <ReactMarkdown source={content}/>
                 </S.Markdown>
                 
-                <textarea name="" disabled={condition} id="" cols="30" rows="10" onKeyDown={(e)=>userButtonTab(e)} >
-                </textarea> 
+               <div>
+                    <textarea name="" disabled={condition} id="" cols="30" rows="10" onKeyDown={(e)=>userButtonTab(e)} >
+                    </textarea> 
+               </div> 
                 
             </div>
 

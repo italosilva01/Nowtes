@@ -29,6 +29,7 @@ export const Paper = styled.div`
     .wrap{
         position:relative;
         display:grid;
+        grid-template-columns:1fr;
         grid-template-areas:
         'a a a'
         'a a a'
@@ -37,42 +38,50 @@ export const Paper = styled.div`
         width:100%;
         align-items:center;
 
+        div + div{
+                grid-area:a;
+               
+
+        }
+
     }
 
     textarea{
-        position:relative;
-        width:100%;
-        background-color:rgba(0,0,0,0.2);
-        font-size:1.2rem;
-        border:none;
-        z-index:3;
         grid-area:a;
-
+        resize:none;
+        width:100%;
+        height:100%;
+        outline:none;
+        font-size:1.0rem;
     }
+
     @media (min-width:800px){
         width:60%;
         
         .wrap{
+            div + div{
+                padding-left:10%;
+                padding-right:10%;
+            }
         }
         textarea{
-            width:90%;
+            width:100%;
         }
     }
+
     @media (min-width:1000px){
         width:800px;
     }
 `;
 
 export const Markdown = styled.div`
-    position:relative;
-    width:100%;
-    border:none;
-    font-size:1.2rem;
-    background-color:pink;
     z-index:2;
     grid-area:a;
-
-
     visibility:hidden;
+
+    @media (min-width:800px) {
+        padding-left:10%;
+        padding-right:10%;
+    }
 
 `;
