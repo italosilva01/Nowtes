@@ -66,7 +66,7 @@ export default function Note (props){
                 <p>DAte teste</p> 
                 <div>
                     <input id="editar" type='checkbox' onClick={()=>saveContent()}></input> 
-                    <label htmlFor="editar" >Editar</label>
+                    <label htmlFor="editar" >{condition?'Editar':'Salvar'}</label>
                 </div>
             </div>
 

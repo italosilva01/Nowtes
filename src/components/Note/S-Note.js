@@ -10,6 +10,9 @@ export const Paper = styled.div`
     height:50vh;
     box-shadow: 0px 0px 10px rgba(0,0,0,0.2);
     
+    input[type='checkbox']{
+        display:none;
+    }
     .visible{
         z-index:1 !important;
         visibility:visible;
