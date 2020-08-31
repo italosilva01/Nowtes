@@ -27,6 +27,11 @@ export const Paper = styled.div`
         display:flex;
         justify-content:space-between;
         width:100%;
+        padding:2%;
+
+        label{
+            margin: 0 1%;
+        }
     }
     
     .wrap{
@@ -47,7 +52,15 @@ export const Paper = styled.div`
 
         }
 
+   
+
     }
+
+    input[type ='button'],#title{
+            width: 30%;
+            margin-bottom:1%;
+
+        }
 
     textarea{
         grid-area:a;
@@ -78,13 +91,28 @@ export const Paper = styled.div`
 `;
 
 export const Markdown = styled.div`
-    z-index:2;
+    /* z-index:2; */
     grid-area:a;
     visibility:hidden;
+    width:100%;
 
     @media (min-width:800px) {
         padding-left:10%;
         padding-right:10%;
     }
 
+`;
+
+export const Listsaves = styled.div`
+
+    overflow-x:scroll;
+    display:flex;
+    
+    div{
+
+        border:1px solid black;
+        padding:5px 4px;
+        margin:0 0.5rem
+
+    }
 `;

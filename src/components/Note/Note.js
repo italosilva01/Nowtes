@@ -10,7 +10,6 @@ export default function Note (props){
 
      useEffect(()=>{
             //change the div's z-index attribute
-            console.log(`start Condition = ${condition}`);
             const markdown = document.querySelector('.wrap>div');
             const textarea = document.querySelector('textarea');
             
@@ -50,39 +49,89 @@ export default function Note (props){
     }
 
     function saveContent(){
-        console.log('clicou');
-
         //saves the content of the textarea tag
         const text = document.querySelector('textarea').value;
         setContent(text);
-        
         //changes conditio's value
         setCondition(!condition);
     }
 
+    function saveNote(){
+        let component =document.querySelector('.markdown'); 
+        let title = document.querySelector("#title").value;
+        let value = component.textContent;
+        localStorage.setItem(title,value);
+        
+      
+
+        let noteSaved = document.createElement("div");
+        let ListSaves = document.querySelector("#listsaves");
+
+        noteSaved.innerText = title;
+        ListSaves.appendChild(noteSaved);
+    
+        component.textContent = "";
+        title = ""; 
+    }
+
+    function loadNotes(){
+
+       for (const iterator of localStorage) {
+           console.log(iterator);
+       }
+
+    }
+
+    
+    function showButtonSaveNote(condition){
+        if(condition){
+            return ( <>
+            
+                <input id="title" placeholder="Digite o titulo da nota"></input>
+                <input value="Salvar" type="button" onClick={()=>saveNote()}></input>
+            
+            </>
+            );
+        }
+    }
+
+    function currentDate(condition){
+        
+        let date = new Date();
+        return date.getDate()+"/"+date.getMonth()+"/"+date.getFullYear();
+    }
+
     return(
-        <S.Paper>
-            <div className="date">
-                <p>DAte teste</p> 
-                <div>
+        <>
+   
+            <S.Paper>
+            
+                <div className="date">
+                    <label>{currentDate()}</label>
                     <input id="editar" type='checkbox' onClick={()=>saveContent()}></input> 
-                    <label htmlFor="editar" >{condition?'Editar':'Salvar'}</label>
+                    {showButtonSaveNote(condition)}
+                    <label htmlFor="editar" >{condition?'Editar':'Terminar Edição'}</label>
+
                 </div>
-            </div>
 
-            <div className="wrap">
-                
-                <S.Markdown>
-                    <ReactMarkdown source={content}/>
-                </S.Markdown>
-                
-               <div>
-                    <textarea name="" disabled={condition} id="" cols="30" rows="10" onKeyDown={(e)=>userButtonTab(e)} >
-                    </textarea> 
-               </div> 
-                
-            </div>
+                <div className="wrap">
+                    
+                    <S.Markdown>
+                        <ReactMarkdown className="markdown" source={content}/>
+                    </S.Markdown>
+                    
+                <div>
+                        <textarea name="" maxlength="360" disabled={condition} id="" cols="30" rows="10" onKeyDown={(e)=>userButtonTab(e)} >
+                        </textarea> 
+                </div> 
 
-        </S.Paper>
+                </div>
+
+            </S.Paper>
+            <S.Listsaves id="listsaves">
+
+                <button onClick={()=>loadNotes()} value="Teste"></button>
+            </S.Listsaves>
+        </>
     );
 }
