@@ -1,5 +1,6 @@
 import styled from 'styled-components';
 
+
 export const Paper = styled.div`
     display:flex;
     flex-direction:column;
@@ -30,7 +31,29 @@ export const Paper = styled.div`
         padding:2%;
 
         label{
-            margin: 0 1%;
+            margin: 1% 1%;
+        };
+
+        #title-note{
+            margin-left:15%;
+            text-overflow:"...";
+            width:25%;
+
+        };
+
+        #title-note,#button-save{
+
+
+        };
+
+        #button-save{
+
+            text-align:center;
+            box-sizing:content-box;
+        };
+
+        #day{
+            display:none;
         }
     }
     
@@ -58,7 +81,7 @@ export const Paper = styled.div`
 
     input[type ='button'],#title{
             width: 30%;
-            margin-bottom:1%;
+            /* margin-bottom:1%; */
 
         }
 
@@ -83,6 +106,24 @@ export const Paper = styled.div`
         textarea{
             width:100%;
         }
+
+        .date{
+            label{
+                margin: 0 5%;
+
+            };
+
+            
+           #button-save{
+            width:5%;
+            margin-left:-7%;
+            
+        };
+
+            #day{
+                display:initial;
+            }
+        }
     }
 
     @media (min-width:1000px){
@@ -105,9 +146,8 @@ export const Markdown = styled.div`
 
 export const Listsaves = styled.div`
 
-    overflow-x:scroll;
-    display:flex;
-    
+    display:grid;
+    width:30%;
     div{
 
         border:1px solid black;
@@ -115,4 +155,38 @@ export const Listsaves = styled.div`
         margin:0 0.5rem
 
     }
+    @media(min-width:800px){
+        ul{
+        
+
+        li{
+            margin-right:2%;
+        }
+    }
+    }
+    
+  
 `;
+
+export const Container = styled.div`
+    display:grid;
+    header{
+        background-color:gray;
+        margin-bottom:2%;
+        text-align:center;
+        font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    };
+
+    @media(min-width:800px){
+
+        header{
+
+        };
+
+        .wrap-2{
+            width:900px;
+            margin:auto;
+        };
+    
+    }
+`

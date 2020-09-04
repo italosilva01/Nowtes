@@ -1,12 +1,12 @@
 import React,{useState,useEffect} from 'react';
 import ReactMarkdown from 'react-markdown';
-
+import Button from 'react-bootstrap/Button';
+import { AiTwotoneEdit ,AiOutlineCheck} from "react-icons/ai";
 import * as S from './S-Note';
 export default function Note (props){
 
     const [content, setContent]= useState(' ');
     const [condition,setCondition] = useState(true);
-    
 
      useEffect(()=>{
             //change the div's z-index attribute
@@ -58,27 +58,31 @@ export default function Note (props){
 
     function saveNote(){
         let component =document.querySelector('.markdown'); 
-        let title = document.querySelector("#title").value;
+        let title = document.querySelector("#title-note").value;
         let value = component.textContent;
         localStorage.setItem(title,value);
         
-      
-
-        let noteSaved = document.createElement("div");
-        let ListSaves = document.querySelector("#listsaves");
-
-        noteSaved.innerText = title;
-        ListSaves.appendChild(noteSaved);
-    
+        document.location.reload();
         component.textContent = "";
         title = ""; 
     }
 
     function loadNotes(){
+        const savednotes = [];
 
-       for (const iterator of localStorage) {
-           console.log(iterator);
-       }
+        for(let count = 0; count < localStorage.length; count++){     
+    
+            savednotes.push(localStorage.key(count));
+            
+        }
+        const notes = savednotes.map((note) => 
+        
+            <li key={note.toString()} classList>{note}</li>
+
+        );
+        return(
+            <ul className>{notes}</ul>
+        )
 
     }
 
@@ -87,8 +91,8 @@ export default function Note (props){
         if(condition){
             return ( <>
             
-                <input id="title" placeholder="Digite o titulo da nota"></input>
-                <input value="Salvar" type="button" onClick={()=>saveNote()}></input>
+                <input id="title-note" placeholder="Digite o titulo da nota"></input>
+                <Button id="button-save" onClick={()=>saveNote()} variant="success">Salvar</Button>
             
             </>
             );
@@ -102,15 +106,21 @@ export default function Note (props){
     }
 
     return(
-        <>
-   
+        <S.Container>
+            
+            {/* <header >
+                <div className="wrap-2">
+                    <h1>Nowtes</h1>
+
+                </div>
+            </header> */}
             <S.Paper>
             
                 <div className="date">
-                    <label>{currentDate()}</label>
+                    <label id="day">{currentDate()}</label>
                     <input id="editar" type='checkbox' onClick={()=>saveContent()}></input> 
                     {showButtonSaveNote(condition)}
-                    <label htmlFor="editar" >{condition?'Editar':'Terminar Edição'}</label>
+                    <label htmlFor="editar" >{condition?<AiTwotoneEdit/> :<AiOutlineCheck/>}</label>
 
                 </div>
 
@@ -128,10 +138,7 @@ export default function Note (props){
                 </div>
 
             </S.Paper>
-            <S.Listsaves id="listsaves">
 
-                <button onClick={()=>loadNotes()} value="Teste"></button>
-            </S.Listsaves>
-        </>
+        </S.Container>
     );
 }
